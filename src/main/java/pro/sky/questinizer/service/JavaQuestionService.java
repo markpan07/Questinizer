@@ -1,11 +1,13 @@
-package service;
+package pro.sky.questinizer.service;
 
-import exception.QuestionDoesNotExistException;
-import model.Question;
-import model.QuestionService;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Service;
+import pro.sky.questinizer.exception.QuestionDoesNotExistException;
+import pro.sky.questinizer.model.Question;
+import pro.sky.questinizer.model.QuestionService;
 
 import java.util.*;
-
+@Service
 public class JavaQuestionService implements QuestionService {
 
     private Set<Question> questions = new HashSet<>();

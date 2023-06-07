@@ -1,12 +1,11 @@
-package service;
+package pro.sky.questinizer.service;
 
-import model.Question;
+import pro.sky.questinizer.model.Question;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
+import pro.sky.questinizer.service.JavaQuestionService;
 
 class JavaQuestionServiceTest {
     JavaQuestionService out = new JavaQuestionService();

@@ -1,11 +1,11 @@
-package controller;
+package pro.sky.questinizer.controller;
 
-import model.Question;
+import pro.sky.questinizer.model.Question;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import service.JavaQuestionService;
+import pro.sky.questinizer.service.JavaQuestionService;
 
 import java.util.Collection;
 
@@ -15,8 +15,8 @@ public class JavaQuestionController {
 
     private final JavaQuestionService javaQuestionService;
 
-    JavaQuestionController (JavaQuestionService javaQuestionService){
-        this.javaQuestionService = javaQuestionService;
+    JavaQuestionController (JavaQuestionService a){
+        this.javaQuestionService = a;
     }
 
     @GetMapping

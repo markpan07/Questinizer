@@ -1,4 +1,4 @@
-package model;
+package pro.sky.questinizer.model;
 
 import java.util.Collection;
 
