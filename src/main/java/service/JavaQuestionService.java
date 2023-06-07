@@ -7,7 +7,7 @@ import java.util.*;
 
 public class JavaQuestionService implements QuestionService {
 
-    Set<Question> questions = new HashSet<>();
+    private Set<Question> questions = new HashSet<>();
     Random r = new Random();
 
     @Override
@@ -43,5 +43,10 @@ public class JavaQuestionService implements QuestionService {
         list.addAll(questions);
 
         return list.get(number);
+    }
+
+    @Override
+    public void clear() {
+        questions.clear();
     }
 }

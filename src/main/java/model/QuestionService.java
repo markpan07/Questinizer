@@ -12,4 +12,7 @@ public interface QuestionService {
     Collection<Question> getAll();
 
     Question getRandomQuestion();
+
+    void clear();
+
 }
