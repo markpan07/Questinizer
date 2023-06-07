@@ -9,6 +9,8 @@ public interface QuestionService {
 
     Question remove(Question question);
 
+    Question remove(String question, String answer);
+
     Collection<Question> getAll();
 
     Question getRandomQuestion();

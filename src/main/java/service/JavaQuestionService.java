@@ -1,5 +1,6 @@
 package service;
 
+import exception.QuestionDoesNotExistException;
 import model.Question;
 import model.QuestionService;
 
@@ -31,6 +32,13 @@ public class JavaQuestionService implements QuestionService {
     }
 
     @Override
+    public Question remove(String question, String answer) {
+        Question q = getQuestion(question, answer);
+        questions.remove(q);
+        return q;
+    }
+
+    @Override
     public Collection<Question> getAll() {
         return Collections.unmodifiableSet(questions);
     }
@@ -49,4 +57,15 @@ public class JavaQuestionService implements QuestionService {
     public void clear() {
         questions.clear();
     }
+
+    public Question getQuestion(String question, String answer) {
+        Question q = new Question(question, answer);
+        if (questions.contains(q)) {
+            return q;
+        } else {
+            throw new QuestionDoesNotExistException("Такого вопроса нет в базе");
+        }
+    }
+
+
 }
