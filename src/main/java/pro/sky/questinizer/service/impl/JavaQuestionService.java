@@ -1,12 +1,13 @@
-package pro.sky.questinizer.service;
+package pro.sky.questinizer.service.impl;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import pro.sky.questinizer.exception.QuestionDoesNotExistException;
+import pro.sky.questinizer.exception.QuestionListIsEmptyException;
 import pro.sky.questinizer.model.Question;
-import pro.sky.questinizer.model.QuestionService;
+import pro.sky.questinizer.service.QuestionService;
 
 import java.util.*;
+
 @Service
 public class JavaQuestionService implements QuestionService {
 
@@ -15,37 +16,39 @@ public class JavaQuestionService implements QuestionService {
 
     @Override
     public Question add(String question, String answer) {
-        Question result = new Question(question, answer);
-        questions.add(result);
-        return result;
+        return add(new Question(question, answer));
     }
 
-    @Override
+/*    @Override
     public Question add(String question) {
-        Question result = new Question(question);
-        questions.add(result);
-        return result;
+        return add(new Question(question));
+    }*/
+
+    @Override
+    public Question add(Question question) {
+        questions.add(question);
+        return question;
     }
 
     @Override
     public Question remove(Question question) {
+        if (!questions.contains(question)) {
+            throw new QuestionDoesNotExistException("Такого вопроса нет в списке");
+        }
         questions.remove(question);
         return question;
     }
 
     @Override
     public Question remove(String question, String answer) {
-        Question q = getQuestion(question, answer);
-        questions.remove(q);
-        return q;
+        return remove(new Question(question, answer));
     }
 
-    @Override
+/*    @Override
     public Question remove(String question) {
-        Question q = getQuestion(question, null);
-        questions.remove(q);
-        return q;
-    }
+        return remove(new Question(question));
+
+    }*/
 
     @Override
     public Collection<Question> getAll() {
@@ -54,12 +57,10 @@ public class JavaQuestionService implements QuestionService {
 
     @Override
     public Question getRandomQuestion() {
-        int bound = questions.size();
-        int number = r.nextInt(bound);
-        List<Question> list = new ArrayList<>();
-        list.addAll(questions);
-
-        return list.get(number);
+        if (questions.isEmpty()) {
+            throw new QuestionListIsEmptyException("Список вопросов пуст");
+        }
+        return new ArrayList<>(questions).get(r.nextInt(questions.size()));
     }
 
     @Override

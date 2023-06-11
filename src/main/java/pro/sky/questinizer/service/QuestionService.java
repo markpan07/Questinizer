@@ -1,17 +1,17 @@
-package pro.sky.questinizer.model;
+package pro.sky.questinizer.service;
+
+import pro.sky.questinizer.model.Question;
 
 import java.util.Collection;
 
 public interface QuestionService {
     Question add(String question, String answer);
 
-    Question add(String question);
+    Question add(Question question);
 
     Question remove(Question question);
 
     Question remove(String question, String answer);
-
-    Question remove(String question);
 
     Collection<Question> getAll();
 

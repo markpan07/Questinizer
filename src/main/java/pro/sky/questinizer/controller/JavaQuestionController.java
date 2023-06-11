@@ -5,40 +5,40 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import pro.sky.questinizer.service.JavaQuestionService;
+import pro.sky.questinizer.service.impl.JavaQuestionService;
 
 import java.util.Collection;
 
 @RestController
-@RequestMapping("/exam")
+@RequestMapping("/java")
 public class JavaQuestionController {
 
-    private final JavaQuestionService javaQuestionService;
+    private final JavaQuestionService questionService;
 
     JavaQuestionController (JavaQuestionService a){
-        this.javaQuestionService = a;
+        this.questionService = a;
     }
 
-    @GetMapping
+/*    @GetMapping()
     public String greetings() {
         return "Добро пожаловать на экзамен";
-    }
+    }*/
 
-    @GetMapping("/java")
+    @GetMapping()
     public Collection<Question> getAll() {
-        return javaQuestionService.getAll();
+        return questionService.getAll();
     }
 
-    @GetMapping("/java/add")
-    public Question add(@RequestParam ("question") String question,
-                        @RequestParam (value = "answer", required = false) String answer) {
-        return javaQuestionService.add(question, answer);
+    @GetMapping("/add")
+    public Question add(@RequestParam String question,
+                        @RequestParam String answer) {
+        return questionService.add(question, answer);
     }
 
-    @GetMapping("/java/remove")
-    public Question remove(@RequestParam ("question") String question,
-                        @RequestParam (value = "answer", required = false) String answer) {
-        return javaQuestionService.remove(question, answer);
+    @GetMapping("/remove")
+    public Question remove(@RequestParam String question,
+                        @RequestParam String answer) {
+        return questionService.remove(question, answer);
     }
 
 }
