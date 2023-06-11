@@ -1,5 +1,6 @@
 package pro.sky.questinizer.service;
 
+import pro.sky.questinizer.exception.QuestionDoesNotExistException;
 import pro.sky.questinizer.model.Question;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
@@ -26,9 +27,12 @@ class JavaQuestionServiceTest {
     void add() {
         out.add("Question 4", "Answer 4");
         out.add("Question 5");
+        Question expected = new Question("expected");
 
         Assertions.assertThat(out.getAll())
                 .contains(new Question("Question 4", "Answer 4"), new Question("Question 5"));
+        Assertions.assertThat(expected.getAnswer())
+                .isEqualTo(null);
     }
 
     @Test
@@ -44,6 +48,19 @@ class JavaQuestionServiceTest {
                 .containsExactlyInAnyOrder(
                         new Question("Question 3", "Answer 3"),
                         new Question("Question 2", "Answer 2"));
+        Assertions.assertThatExceptionOfType(QuestionDoesNotExistException.class)
+                .isThrownBy(() -> out.remove("Question 2"));
+    }
+
+    @Test
+    void removeByWords() {
+        Assertions.assertThat(out.remove("Question 1", "Answer 1"))
+                .isEqualTo(new Question("Question 1", "Answer 1"));
+        Assertions.assertThat(out.getAll())
+                .containsExactlyInAnyOrder(
+                        new Question("Question 3", "Answer 3"),
+                        new Question("Question 2", "Answer 2"));
+
     }
 
     @Test

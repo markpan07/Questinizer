@@ -3,8 +3,8 @@ package pro.sky.questinizer.model;
 import java.util.Objects;
 
 public class Question {
-    String question;
-    String answer;
+    private String question;
+    private String answer;
 
     public Question(String question) {
         this.question = question;
@@ -25,8 +25,8 @@ public class Question {
 
     @Override
     public String toString() {
-        return "Question: '" + question + '\'' + "\n" +
-                "Answer: '" + answer + '\'';
+        return "Question: " + question + "\n" +
+                "Answer: " + answer;
     }
 
     @Override

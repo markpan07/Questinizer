@@ -41,6 +41,13 @@ public class JavaQuestionService implements QuestionService {
     }
 
     @Override
+    public Question remove(String question) {
+        Question q = getQuestion(question, null);
+        questions.remove(q);
+        return q;
+    }
+
+    @Override
     public Collection<Question> getAll() {
         return Collections.unmodifiableSet(questions);
     }
